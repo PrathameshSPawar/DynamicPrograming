@@ -20,3 +20,4 @@ public class Main
 		System.out.println(fibo(6));
 	}
 }
+//TC: O(N)
