@@ -1,5 +1,4 @@
 // User function Template for Java
-
 class Solution {
     public int memo[][];
     public int maximumPoints(int arr[][]) {
