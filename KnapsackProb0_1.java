@@ -1,3 +1,4 @@
+//First version of Knapsack
 //https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
 class Solution {
     static int dp[][];
@@ -45,4 +46,48 @@ class Solution {
         
     //     return dp[ind][w]=Math.max(notT,take);
     // }
+}
+
+
+//Second Version of knapsack
+//https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
+class Solution {
+    static int INT=(int)-1e9;
+    static int dp[][];
+    static int knapSack(int val[], int wt[], int capacity) {
+        // code here
+        int n=val.length;
+        dp=new int[n][capacity+1];
+        for(int cap=0;cap<=capacity;cap++)
+        {
+            dp[0][cap]=val[0]*(cap/wt[0]);
+        }
+        
+        for(int ind=1;ind<n;ind++)
+        {
+            for(int cap=0;cap<=capacity;cap++)
+            {
+                int notT=0+dp[ind-1][cap];
+                int take=INT;
+                if(cap>=wt[ind]) take=val[ind]+dp[ind][cap-wt[ind]];
+                dp[ind][cap]=Math.max(take,notT);
+                
+            }
+        }
+        return dp[n-1][capacity];
+    }
+    
+    static int helper(int val[],int wt[],int ind,int cap)
+    {
+        if(ind==0)
+        {
+            return val[0]*(cap/wt[0]);
+        }
+        
+        int notT=0+helper(val,wt,ind-1,cap);
+        int take=INT;
+        if(cap>=wt[ind]) take=val[ind]+helper(val,wt,ind,cap-wt[ind]);
+        
+        return Math.max(notT,take);
+    }
 }
